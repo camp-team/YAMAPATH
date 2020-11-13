@@ -10,7 +10,7 @@
     ]
   },
   "hosting": {
-      "public": "public",
+      "public": "dist/yamapath",
       "ignore": [
         "firebase.json",
         "**/.*",
