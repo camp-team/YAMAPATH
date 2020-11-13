@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "yamapath-dev-40f13"
+  },
+  "targets": {
+    "yamapath-dev-40f13": {
+      "hosting": {
+        "yamapath": [
+          "yamapath-dev-40f13"
+        ]
+      }
+    }
   }
 }
