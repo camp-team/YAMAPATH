@@ -1,0 +1,29 @@
+@import 'variables';
+
+:host {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-main;
+  z-index: 100;
+}
+
+.toolbar {
+  color: #efefef;
+  &__inner {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 24px;
+  }
+  &__items {
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    &--active {
+      color: $color-font;
+    }
+  }
+}
