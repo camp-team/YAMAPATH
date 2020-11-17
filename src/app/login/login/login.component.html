@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="login">
+    <h1 class="login__header">ログイン</h1>
+    <div class="action">
+      <button
+        class="action__button action__button--google"
+        (click)="googleLogin()"
+      >
+        Google
+      </button>
+      <p>または</p>
+      <button
+        class="action__button action__button--twitter"
+        (click)="twitterLogin()"
+      >
+        Twitter
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="login__text">
+      <p>ログインすると、投稿、いいねができるようになります</p>
+    </div>
+  </div>
+</div>
