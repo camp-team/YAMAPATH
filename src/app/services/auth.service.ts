@@ -13,7 +13,6 @@ import { shareReplay, switchMap } from 'rxjs/operators';
 })
 export class AuthService {
   uid: string;
-  isProcessing: boolean;
 
   user$: Observable<UserData> = this.afAuth.authState.pipe(
     switchMap((afUser) => {
@@ -34,10 +33,35 @@ export class AuthService {
     private snackBar: MatSnackBar
   ) {}
 
-  login(): Promise<firebase.auth.UserCredential> {
+  private resolveLogin(): void {
+    this.router.navigateByUrl('/');
+    this.snackBar.open('ログインしました', null);
+  }
+
+  private rejectLogin(error: { message: any }): void {
+    console.error(error.message);
+    this.snackBar.open(
+      'ログインエラーです。数秒後にもう一度お試しください。',
+      null
+    );
+  }
+
+  googleLogin(): Promise<void> {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-    return this.afAuth.signInWithPopup(provider);
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then(() => this.resolveLogin())
+      .catch((error) => this.rejectLogin(error));
+  }
+
+  twitterLogin(): Promise<void> {
+    const provider = new firebase.auth.TwitterAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    return this.afAuth
+      .signInWithPopup(provider)
+      .then(() => this.resolveLogin())
+      .catch((error) => this.rejectLogin(error));
   }
 
   logout(): void {

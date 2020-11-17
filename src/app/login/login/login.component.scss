@@ -1,0 +1,55 @@
+@import 'mixins';
+@import 'variables';
+
+.login {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 80px;
+  border: 1px solid $color-main;
+  border-radius: 8px;
+  padding: 40px;
+  @include sp {
+    padding: 0 16px;
+  }
+  &__header {
+    color: $color-main;
+  }
+  &__text {
+    color: $color-font;
+  }
+}
+
+.action {
+  margin-bottom: 40px;
+  color: $color-font;
+  &__button {
+    display: block;
+    height: 48px;
+    width: 80%;
+    margin: 16px auto;
+    padding: 2px 25px;
+    border-radius: 30px;
+    line-height: 48px;
+    color: $color-font;
+    transition: ease-in-out 0.3s;
+    &--google {
+      border: 2px solid $color-font;
+    }
+    &--twitter {
+      border: 2px solid $color-font;
+      margin-bottom: 48px;
+    }
+    &--google:hover {
+      cursor: pointer;
+      border-left: 2px solid #4285f4;
+      border-top: 2px solid #db4437;
+      border-right: 2px solid #f4b400;
+      border-bottom: 2px solid #0f9d58;
+    }
+    &--twitter:hover {
+      cursor: pointer;
+      border: 2px solid #2aa1f1;
+    }
+  }
+}
