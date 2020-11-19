@@ -1,0 +1,25 @@
+@import 'variables';
+
+.help-button {
+  position: absolute;
+  top: 74px;
+  right: 16px;
+  color: $color-font;
+  font-size: 32px;
+  width: 32px;
+  z-index: 10;
+  &::after {
+    content: '';
+    background-color: #fff;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    position: absolute;
+    top: 13px;
+    left: 10px;
+    z-index: -1;
+  }
+  & mat-icon {
+    font-size: 32px;
+  }
+}
