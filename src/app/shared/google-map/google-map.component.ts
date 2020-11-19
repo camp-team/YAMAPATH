@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 
 @Component({
@@ -6,7 +6,7 @@ import { GoogleMap } from '@angular/google-maps';
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.scss']
 })
-export class GoogleMapComponent implements OnInit {
+export class GoogleMapComponent implements OnInit, AfterViewInit {
   @ViewChild(GoogleMap, { static: false }) map: google.maps.Map;
 
   options: google.maps.MapOptions = {
@@ -30,6 +30,15 @@ export class GoogleMapComponent implements OnInit {
   markerOptions = { draggable: false };
 
   constructor() { }
+  ngAfterViewInit(): void {
+    this.map.data.loadGeoJson('assets/amagiTrail.geojson');
+
+    this.map.data.setStyle({
+      strokeColor: '#4dc0b2',
+      strokeWeight: 5,
+      strokeOpacity: 0.8
+    });
+  }
 
   ngOnInit(): void {
     if (navigator.geolocation) {
