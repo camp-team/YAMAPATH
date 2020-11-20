@@ -1,13 +1,24 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
-  styleUrls: ['./google-map.component.scss']
+  styleUrls: ['./google-map.component.scss'],
 })
 export class GoogleMapComponent implements OnInit, AfterViewInit {
+  @Input() type: 'full' | 'small';
+
   @ViewChild(GoogleMap, { static: false }) map: google.maps.Map;
+
+  height = '100%';
+  width = '100%';
 
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
@@ -25,20 +36,11 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
       url: 'assets/icons/current-position-marker.svg',
       scaledSize: new google.maps.Size(28, 28),
     },
-    draggable: false
+    draggable: false,
   };
   markerOptions = { draggable: false };
 
-  constructor() { }
-  ngAfterViewInit(): void {
-    this.map.data.loadGeoJson('assets/amagiTrail.geojson');
-
-    this.map.data.setStyle({
-      strokeColor: '#4dc0b2',
-      strokeWeight: 5,
-      strokeOpacity: 0.8
-    });
-  }
+  constructor() {}
 
   ngOnInit(): void {
     if (navigator.geolocation) {
@@ -49,6 +51,20 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
         };
       });
     }
+    if (this.type === 'small') {
+      this.height = '200px';
+      this.width = '300px';
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.map.data.loadGeoJson('assets/amagiTrail.geojson');
+
+    this.map.data.setStyle({
+      strokeColor: '#4dc0b2',
+      strokeWeight: 5,
+      strokeOpacity: 0.8,
+    });
   }
 
   panToCenter(): void {
@@ -68,5 +84,4 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
   onCurrentPositionMarkerClicked(): void {
     this.map.panTo(this.currentPosition);
   }
-
 }

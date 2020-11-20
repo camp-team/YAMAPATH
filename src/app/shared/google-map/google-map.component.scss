@@ -1,4 +1,9 @@
 @import 'variables';
+.map {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
 
 .button {
   &__center {
@@ -6,11 +11,17 @@
     bottom: 108px;
     right: 16px;
     color: $color-font;
+    &--small {
+      bottom: 24px;
+    }
   }
   &__current {
     position: absolute;
     bottom: 176px;
     right: 16px;
     color: $color-font;
+    &--small {
+      bottom: 80px;
+    }
   }
 }
