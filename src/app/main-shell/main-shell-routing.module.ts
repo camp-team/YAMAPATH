@@ -13,12 +13,17 @@ const routes: Routes = [
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomeModule),
       },
-    ]
-  }
+      {
+        path: 'create',
+        loadChildren: () =>
+          import('./create/create.module').then((m) => m.CreateModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MainShellRoutingModule { }
+export class MainShellRoutingModule {}

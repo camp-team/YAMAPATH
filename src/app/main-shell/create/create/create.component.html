@@ -1,0 +1,71 @@
+<div class="inner-container">
+  <app-google-map type="small"></app-google-map>
+  <div class="form">
+    <form [formGroup]="form" class="form__body" (ngSubmit)="submit()">
+      <mat-form-field>
+        <mat-label>投稿の種類</mat-label>
+        <mat-select formControlName="category" required>
+          <mat-option
+            *ngFor="let categoryOption of categoryOptions"
+            [value]="categoryOption.value"
+            >{{ categoryOption.label }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="categoryControl.hasError('required')"
+          >選択してください</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>文字を入力してください</mat-label>
+        <textarea
+          matTextareaAutosize
+          type="text"
+          placeholder="test"
+          formControlName="content"
+          matTextareaAutosize
+          matInput
+          rows="5"
+          cols="40"
+          required
+        ></textarea>
+        <mat-error *ngIf="contentControl.hasError('required')"
+          >必須入力です</mat-error
+        >
+        <mat-error *ngIf="contentControl.hasError('maxlength')"
+          >長すぎます</mat-error
+        >
+      </mat-form-field>
+      <div class="button-wrapper">
+        <mat-slide-toggle
+          formControlName="public"
+          [(ngModel)]="isChecked"
+          color="primary"
+          class="form__public"
+          ><div *ngIf="isChecked; then public; else private"></div>
+          <ng-template #public>公開</ng-template>
+          <ng-template #private>非公開</ng-template></mat-slide-toggle
+        >
+        <mat-slide-toggle
+          formControlName="isPosition"
+          [(ngModel)]="isPosition"
+          color="primary"
+          class="form__isPosition"
+          ><div *ngIf="isPosition; then thenBlock; else elseBlock"></div>
+          <ng-template #thenBlock>位置情報を含める</ng-template>
+          <ng-template #elseBlock
+            >位置情報を含めない</ng-template
+          ></mat-slide-toggle
+        >
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="form.invalid"
+          class="form__submit"
+        >
+          投稿
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

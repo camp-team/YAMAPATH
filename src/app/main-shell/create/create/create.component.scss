@@ -1,0 +1,23 @@
+mat-form-field {
+  width: 100%;
+}
+.form {
+  display: grid;
+  gap: 24px;
+  max-width: 800px;
+  padding: 0 24px;
+  margin: 32px auto;
+  box-sizing: border-box;
+  @media screen and (max-width: 500px) {
+    padding: 0 8px;
+  }
+  &__submit {
+    color: #efefef;
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
