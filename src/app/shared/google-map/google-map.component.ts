@@ -5,7 +5,10 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { GoogleMap } from '@angular/google-maps';
+import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { Observable } from 'rxjs';
+import { Post } from 'src/app/interfaces/post';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-google-map',
@@ -14,8 +17,9 @@ import { GoogleMap } from '@angular/google-maps';
 })
 export class GoogleMapComponent implements OnInit, AfterViewInit {
   @Input() type: 'full' | 'small';
-
   @ViewChild(GoogleMap, { static: false }) map: google.maps.Map;
+
+  posts$: Observable<Post[]> = this.postService.getPosts();
 
   height = '100%';
   width = '100%';
@@ -40,7 +44,7 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
   };
   markerOptions = { draggable: false };
 
-  constructor() {}
+  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
     if (navigator.geolocation) {
@@ -83,5 +87,69 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
 
   onCurrentPositionMarkerClicked(): void {
     this.map.panTo(this.currentPosition);
+  }
+
+  markerClicked(marker: MapMarker, window: MapInfoWindow) {
+    window.open(marker);
+  }
+
+  changeMarkerIcons(category: string) {
+    switch (category) {
+      case 'danger': {
+        const markerOptions: google.maps.MarkerOptions = {
+          icon: {
+            url: 'assets/icons/danger.svg',
+            scaledSize: new google.maps.Size(40, 40),
+          },
+        };
+        return markerOptions;
+      }
+      case 'view': {
+        const markerOptions: google.maps.MarkerOptions = {
+          icon: {
+            url: 'assets/icons/camera.svg',
+            scaledSize: new google.maps.Size(40, 40),
+          },
+        };
+        return markerOptions;
+      }
+      case 'toilet': {
+        const markerOptions: google.maps.MarkerOptions = {
+          icon: {
+            url: 'assets/icons/wc.svg',
+            scaledSize: new google.maps.Size(40, 40),
+          },
+        };
+        return markerOptions;
+      }
+      case 'water': {
+        const markerOptions: google.maps.MarkerOptions = {
+          icon: {
+            url: 'assets/icons/water.svg',
+            scaledSize: new google.maps.Size(40, 40),
+          },
+        };
+        return markerOptions;
+      }
+      case 'rest': {
+        const markerOptions: google.maps.MarkerOptions = {
+          icon: {
+            url: 'assets/icons/rest.svg',
+            scaledSize: new google.maps.Size(40, 40),
+          },
+        };
+        return markerOptions;
+      }
+      case 'other': {
+        const markerOptions: google.maps.MarkerOptions = {
+          icon: {
+            url: 'assets/icons/other.svg',
+            scaledSize: new google.maps.Size(40, 40),
+          },
+        };
+        return markerOptions;
+      }
+      default:
+    }
   }
 }

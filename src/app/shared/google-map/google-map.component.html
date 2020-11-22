@@ -8,6 +8,17 @@
         (mapClick)="onCurrentPositionMarkerClicked()"
       >
       </map-marker>
+      <map-marker
+        #marker="mapMarker"
+        *ngFor="let posts of posts$ | async"
+        [position]="posts.position"
+        [options]="changeMarkerIcons(posts.category)"
+        (mapClick)="markerClicked(marker, window)"
+      >
+        <map-info-window class="info__container" #window="mapInfoWindow">
+          <div class="info__content">{{ posts.text }}</div>
+        </map-info-window>
+      </map-marker>
     </google-map>
 
     <button
@@ -38,6 +49,17 @@
         [options]="currentPositionMarkerOption"
         (mapClick)="onCurrentPositionMarkerClicked()"
       >
+      </map-marker>
+      <map-marker
+        #marker="mapMarker"
+        *ngFor="let posts of posts$ | async"
+        [position]="posts.position"
+        [options]="changeMarkerIcons(posts.category)"
+        (mapClick)="markerClicked(marker, window)"
+      >
+        <map-info-window class="info__container" #window="mapInfoWindow">
+          <div class="info__content">{{ posts.text }}</div>
+        </map-info-window>
       </map-marker>
     </google-map>
 

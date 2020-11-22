@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
 import { Post } from '../interfaces/post';
 import { AuthService } from './auth.service';
 
@@ -29,5 +30,11 @@ export class PostService {
     };
     await this.db.doc<Post>(`posts/${postId}`).set(newValue);
     return newValue;
+  }
+
+  getPosts(): Observable<Post[]> {
+    return this.db
+      .collection<Post>('posts', (ref) => ref.where('public', '==', true))
+      .valueChanges();
   }
 }
