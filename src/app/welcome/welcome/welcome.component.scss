@@ -1,0 +1,156 @@
+@import 'mixins';
+@import 'variables';
+
+.welcome-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 60px 0;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.hero {
+  position: relative;
+  min-height: 56vh;
+  padding: 60px 0;
+  margin-top: 10vw;
+  margin-bottom: 32vw;
+  text-align: center;
+  &__logo {
+    font-family: 'Baloo Da 2', cursive;
+    font-weight: 800;
+    font-size: 48px;
+    color: $color-font;
+  }
+  &__text {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 40px;
+    color: $color-font;
+  }
+}
+
+.question {
+  background-color: $color-main;
+  color: #fff;
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    background-image: url('/assets/images/hero-wave.svg');
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -44vw;
+    left: 0;
+    right: 0;
+    height: 47vw;
+    width: 100%;
+    z-index: -1;
+  }
+  &::after {
+    content: '';
+    display: block;
+    background-image: url('/assets/images/wave-1.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: -8vw;
+    left: 0;
+    right: 0;
+    height: 9vw;
+    width: 100%;
+    z-index: -1;
+  }
+  &__text {
+    font-size: 16px;
+    line-height: 40px;
+    margin-bottom: 80px;
+  }
+  &__image {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.about {
+  color: $color-font;
+  &__text {
+    font-size: 16px;
+    line-height: 40px;
+    font-weight: 600;
+    margin-top: 40px;
+  }
+  &__logo {
+    font-family: 'Baloo Da 2', cursive;
+    font-size: 18px;
+    line-height: 40px;
+    font-weight: 600;
+  }
+  &__image {
+    border-radius: 36px;
+    margin: 0 auto;
+    box-shadow: 12px 12px 26px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.start {
+  background-color: $color-light;
+  position: relative;
+  padding: 80px 0 0 0;
+  &::before {
+    content: '';
+    display: block;
+    background-image: url('/assets/images/wave-2.svg');
+    background-position: bottom center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -10vw;
+    left: 0;
+    right: 0;
+    height: 11vw;
+    width: 100%;
+    z-index: -1;
+  }
+  &__text {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 800;
+    font-family: 'Baloo Da 2', cursive;
+    margin: 24px 24px;
+  }
+  &__login-skip {
+    display: block;
+    color: #fff;
+    margin-bottom: 80px;
+  }
+  &__image {
+    margin: 40px auto 80px;
+  }
+}
+
+.login-button {
+  margin-top: 3vw;
+  margin-bottom: 12vw;
+  padding: 16px 80px;
+  background-color: $color-main;
+  border-radius: 50px;
+  color: #fafafa;
+  font-size: 16px;
+  font-weight: 600;
+  &--accent {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 16px 32px;
+    background-color: #fafafa;
+    color: $color-font;
+  }
+}
