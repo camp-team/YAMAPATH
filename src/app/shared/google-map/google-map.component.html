@@ -16,7 +16,15 @@
         (mapClick)="markerClicked(marker, window)"
       >
         <map-info-window class="info__container" #window="mapInfoWindow">
-          <div class="info__content">{{ posts.text }}</div>
+          <div class="info__text">{{ posts.text }}</div>
+          <ng-container *ngIf="posts.imageUrl">
+            <div
+              [style.background-image]="'url(' + posts.imageUrl + ')'"
+              class="info__image"
+              alt="image"
+            ></div>
+            <p>{{ posts.imageUrl }}</p>
+          </ng-container>
         </map-info-window>
       </map-marker>
     </google-map>
@@ -58,7 +66,14 @@
         (mapClick)="markerClicked(marker, window)"
       >
         <map-info-window class="info__container" #window="mapInfoWindow">
-          <div class="info__content">{{ posts.text }}</div>
+          <div class="info__text">{{ posts.text }}</div>
+          <ng-container *ngIf="posts.imageUrl">
+            <div
+              [style.background-image]="'url(' + posts.imageUrl + ')'"
+              class="info__image"
+              alt="image"
+            ></div>
+          </ng-container>
         </map-info-window>
       </map-marker>
     </google-map>

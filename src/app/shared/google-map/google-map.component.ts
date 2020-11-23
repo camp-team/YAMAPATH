@@ -21,9 +21,6 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
 
   posts$: Observable<Post[]> = this.postService.getPosts();
 
-  height = '100%';
-  width = '100%';
-
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
     zoom: 14,
@@ -55,10 +52,6 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
         };
       });
     }
-    if (this.type === 'small') {
-      this.height = '200px';
-      this.width = '300px';
-    }
   }
 
   ngAfterViewInit(): void {
@@ -77,12 +70,14 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
 
   panToCurrentPosition(): void {
     this.map.panTo(this.currentPosition);
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.currentPosition = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-    });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.currentPosition = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+      });
+    }
   }
 
   onCurrentPositionMarkerClicked(): void {

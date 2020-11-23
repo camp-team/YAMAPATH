@@ -24,13 +24,13 @@ export class CreateComponent implements OnInit {
         Validators.pattern(/danger|view|toilet|water|rest|other/),
       ],
     ],
-    content: ['', [Validators.required, Validators.maxLength(500)]],
+    text: ['', [Validators.required, Validators.maxLength(500)]],
     public: [true],
     isPosition: [true],
   });
 
-  get contentControl(): FormControl {
-    return this.form.get('content') as FormControl;
+  get textControl(): FormControl {
+    return this.form.get('text') as FormControl;
   }
 
   get categoryControl(): FormControl {
