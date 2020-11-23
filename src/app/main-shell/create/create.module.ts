@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CropperModule } from '@deer-inc/cropper';
 
 @NgModule({
   declarations: [CreateComponent],
@@ -24,6 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatSlideToggleModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
+    CropperModule,
   ],
 })
 export class CreateModule {}

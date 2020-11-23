@@ -12,6 +12,7 @@ import { PostService } from 'src/app/services/post.service';
 export class CreateComponent implements OnInit {
   isChecked = true;
   isPosition = true;
+  imageFile: string;
 
   private currentPosition: google.maps.LatLngLiteral;
 
@@ -84,12 +85,18 @@ export class CreateComponent implements OnInit {
     }
   }
 
-  // 送信ボタンが押されたときに発動
-  submit() {
+  onCroppedImage(image: string): void {
+    this.imageFile = image;
+  }
+
+  submit(): void {
+    if (!this.form.value.isPosition) {
+      this.currentPosition = null;
+    }
     this.postService
-      .createPost(this.form.value, this.currentPosition)
+      .createPost(this.form.value, this.currentPosition, this.imageFile)
       .then(() => {
-        this.snackBar.open('投稿しました、反映にはリロードが必要です', null);
+        this.snackBar.open('投稿しました', null);
         this.router.navigateByUrl('/');
       });
   }

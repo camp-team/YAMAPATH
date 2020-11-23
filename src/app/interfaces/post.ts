@@ -7,4 +7,5 @@ export interface Post {
   position: google.maps.LatLngLiteral;
   createdAt: number;
   isPublic: boolean;
+  imageUrl?: string;
 }

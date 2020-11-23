@@ -17,19 +17,32 @@ export class PostService {
 
   async createPost(
     post: Omit<Post, 'postId' | 'createdAt' | 'authorUid'>,
-    position: google.maps.LatLngLiteral
+    position: google.maps.LatLngLiteral,
+    file: string
   ): Promise<Post> {
     const postId = this.db.createId();
+    let imageUrl: string;
+    if (file !== undefined) {
+      imageUrl = await this.setImageToStorage(postId, file);
+    }
     const newValue: Post = {
       postId,
       position,
       createdAt: Date.now(),
       authorUid: this.authService.uid,
       likedCount: 0,
+      imageUrl,
       ...post,
     };
     await this.db.doc<Post>(`posts/${postId}`).set(newValue);
     return newValue;
+  }
+
+  async setImageToStorage(postId: string, file: string): Promise<string> {
+    const resule = await this.storage
+      .ref(`posts/${postId}`)
+      .putString(file, 'data_url');
+    return resule.ref.getDownloadURL();
   }
 
   getPosts(): Observable<Post[]> {

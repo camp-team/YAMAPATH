@@ -36,6 +36,18 @@
           >長すぎます</mat-error
         >
       </mat-form-field>
+      <div class="form__image">
+        <div class="form__image--label">画像を投稿</div>
+        <div class="form__cropper">
+          <deer-crop-trigger
+            [options]="{
+              aspectRatio: 1 / 1
+            }"
+            (image)="onCroppedImage($event)"
+          ></deer-crop-trigger>
+        </div>
+      </div>
+
       <div class="button-wrapper">
         <mat-slide-toggle
           formControlName="public"
