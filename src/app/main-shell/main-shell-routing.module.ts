@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MainShellComponent } from './main-shell/main-shell.component';
+import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
         path: 'create',
         loadChildren: () =>
           import('./create/create.module').then((m) => m.CreateModule),
+      },
+      {
+        path: 'terms',
+        component: TermsComponent,
       },
     ],
   },

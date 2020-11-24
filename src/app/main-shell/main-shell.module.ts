@@ -8,15 +8,23 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { TermsComponent } from './terms/terms.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
-  declarations: [MainShellComponent, HeaderComponent, ToolbarComponent],
+  declarations: [
+    MainShellComponent,
+    HeaderComponent,
+    ToolbarComponent,
+    TermsComponent,
+  ],
   imports: [
     CommonModule,
     MainShellRoutingModule,
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    MatDividerModule,
   ],
 })
 export class MainShellModule {}
