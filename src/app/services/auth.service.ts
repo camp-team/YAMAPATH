@@ -22,8 +22,7 @@ export class AuthService {
       } else {
         return of(null);
       }
-    }),
-    shareReplay(1)
+    })
   );
 
   constructor(
@@ -66,8 +65,8 @@ export class AuthService {
 
   logout(): void {
     this.afAuth.signOut().then(() => {
-      this.snackBar.open('ログアウトしました', null);
       this.router.navigateByUrl('/welcome');
+      this.snackBar.open('ログアウトしました', null);
     });
   }
 }
