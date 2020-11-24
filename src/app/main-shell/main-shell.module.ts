@@ -8,9 +8,15 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { LegalComponent } from './legal/legal.component';
 
 @NgModule({
-  declarations: [MainShellComponent, HeaderComponent, ToolbarComponent],
+  declarations: [
+    MainShellComponent,
+    HeaderComponent,
+    ToolbarComponent,
+    LegalComponent,
+  ],
   imports: [
     CommonModule,
     MainShellRoutingModule,
