@@ -1,0 +1,23 @@
+@import 'variables';
+
+.not-found {
+  text-align: center;
+}
+
+.number {
+  font-family: 'Baloo Da 2', cursive;
+  font-size: 80px;
+  font-weight: 600;
+  color: $color-main;
+  margin-top: 20%;
+}
+
+.description {
+  color: $color-font;
+  margin-bottom: 48px;
+}
+
+.top-link {
+  color: $color-font;
+  border-bottom: solid 1px $color-font;
+}
