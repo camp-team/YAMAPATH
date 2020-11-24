@@ -1,0 +1,100 @@
+<ng-container *ngIf="type === 'small'; else full">
+  <div class="map">
+    <google-map width="100%" height="300px" [options]="options">
+      <map-marker
+        *ngIf="currentPosition"
+        [position]="currentPosition"
+        [options]="currentPositionMarkerOption"
+        (mapClick)="onCurrentPositionMarkerClicked()"
+      >
+      </map-marker>
+      <map-marker
+        #marker="mapMarker"
+        *ngFor="let posts of posts$ | async"
+        [position]="posts.position"
+        [options]="changeMarkerIcons(posts.category)"
+        (mapClick)="markerClicked(marker, window)"
+      >
+        <map-info-window class="info__container" #window="mapInfoWindow">
+          <div class="info__text">{{ posts.text }}</div>
+          <ng-container *ngIf="posts.imageUrl">
+            <div
+              [style.background-image]="'url(' + posts.imageUrl + ')'"
+              class="info__image"
+              alt="image"
+            ></div>
+            <p>{{ posts.imageUrl }}</p>
+          </ng-container>
+        </map-info-window>
+      </map-marker>
+    </google-map>
+
+    <button
+      mat-mini-fab
+      color="accent"
+      class="button__center button__center--small"
+      (click)="panToCenter()"
+    >
+      <mat-icon>center_focus_strong</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="accent"
+      class="button__current button__current--small"
+      (click)="panToCurrentPosition()"
+    >
+      <mat-icon>near_me</mat-icon>
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #full>
+  <div class="map">
+    <google-map width="100%" height="100%" [options]="options">
+      <map-marker
+        *ngIf="currentPosition"
+        [position]="currentPosition"
+        [options]="currentPositionMarkerOption"
+        (mapClick)="onCurrentPositionMarkerClicked()"
+      >
+      </map-marker>
+      <map-marker
+        #marker="mapMarker"
+        *ngFor="let posts of posts$ | async"
+        [position]="posts.position"
+        [options]="changeMarkerIcons(posts.category)"
+        (mapClick)="markerClicked(marker, window)"
+      >
+        <map-info-window class="info__container" #window="mapInfoWindow">
+          <div class="info__text">{{ posts.text }}</div>
+          <ng-container *ngIf="posts.imageUrl">
+            <div
+              [style.background-image]="'url(' + posts.imageUrl + ')'"
+              class="info__image"
+              alt="image"
+            ></div>
+          </ng-container>
+        </map-info-window>
+      </map-marker>
+    </google-map>
+
+    <button
+      mat-mini-fab
+      color="accent"
+      class="button__center"
+      [class.button__center--small]="type === 'small'"
+      (click)="panToCenter()"
+    >
+      <mat-icon>center_focus_strong</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="accent"
+      class="button__current"
+      [class.button__crrent--small]="type === 'small'"
+      (click)="panToCurrentPosition()"
+    >
+      <mat-icon>near_me</mat-icon>
+    </button>
+  </div>
+</ng-template>

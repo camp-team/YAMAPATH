@@ -11,8 +11,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$yamapath-primary: mat-palette($mat-indigo);
-$yamapath-accent: mat-palette($mat-pink, A200, A100, A400);
+$yamapath-primary: mat-palette($mat-teal, 300);
+$yamapath-accent: mat-palette($mat-yellow, 700);
 
 // The warn palette is optional (defaults to red).
 $yamapath-warn: mat-palette($mat-red);
@@ -50,6 +50,10 @@ body {
   background-color: #fafafa;
 }
 
+a {
+  text-decoration: none;
+}
+
 button {
   background-color: transparent;
   border: none;
@@ -71,5 +75,11 @@ p {
 .container {
   max-width: 1080px;
   margin: 0 auto;
+  padding: 0 16px;
+}
+
+.inner-container {
+  max-width: 1080px;
+  margin: 64px auto;
   padding: 0 16px;
 }
