@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { LegalComponent } from './legal/legal.component';
+import { TermsComponent } from './terms/terms.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { LegalComponent } from './legal/legal.component';
     HeaderComponent,
     ToolbarComponent,
     LegalComponent,
+    TermsComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { LegalComponent } from './legal/legal.component';
     MatIconModule,
     MatMenuModule,
     MatButtonModule,
+    MatDividerModule,
   ],
 })
 export class MainShellModule {}
