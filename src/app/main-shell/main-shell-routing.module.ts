@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { MainShellComponent } from './main-shell/main-shell.component';
+import { TermsComponent } from './terms/terms.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
           import('./create/create.module').then((m) => m.CreateModule),
         canLoad: [AuthGuard],
         canActivate: [AuthGuard],
+      },
+      {
+        path: 'terms',
+        component: TermsComponent,
       },
     ],
   },

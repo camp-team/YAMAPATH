@@ -31,7 +31,7 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
     mapId: '6c669e37c1a4135',
   } as google.maps.MapOptions;
 
-  currentPosition: google.maps.LatLngLiteral;
+  currentPosition: google.maps.LatLngLiteral = null;
   currentPositionMarkerOption: google.maps.MarkerOptions = {
     icon: {
       url: 'assets/icons/current-position-marker.svg',
@@ -69,7 +69,6 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
   }
 
   panToCurrentPosition(): void {
-    this.map.panTo(this.currentPosition);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentPosition = {
@@ -78,17 +77,18 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
         };
       });
     }
+    this.map.panTo(this.currentPosition);
   }
 
   onCurrentPositionMarkerClicked(): void {
     this.map.panTo(this.currentPosition);
   }
 
-  markerClicked(marker: MapMarker, window: MapInfoWindow) {
+  markerClicked(marker: MapMarker, window: MapInfoWindow): void {
     window.open(marker);
   }
 
-  changeMarkerIcons(category: string) {
+  changeMarkerIcons(category: string): google.maps.MarkerOptions {
     switch (category) {
       case 'danger': {
         const markerOptions: google.maps.MarkerOptions = {
