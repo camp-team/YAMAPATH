@@ -25,6 +25,13 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'settings',
+        loadChildren: () =>
+          import('./settings/settings.module').then((m) => m.SettingsModule),
+        canLoad: [AuthGuard],
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'terms',
         component: TermsComponent,
       },
