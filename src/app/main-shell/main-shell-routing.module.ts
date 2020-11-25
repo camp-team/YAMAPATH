@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LegalComponent } from './legal/legal.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { MainShellComponent } from './main-shell/main-shell.component';
 import { TermsComponent } from './terms/terms.component';
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'terms',
         component: TermsComponent,
+      },
+      {
+        path: 'legal',
+        component: LegalComponent,
       },
     ],
   },
