@@ -39,7 +39,6 @@
             autocomplete="off"
             placeholder="新しい名前"
             [formControl]="nameForm"
-            required
           />
           <mat-error *ngIf="nameForm.hasError('maxlength')"
             >30文字以内にしてください</mat-error
@@ -48,7 +47,7 @@
         <button
           mat-flat-button
           color="primary"
-          [disabled]="nameForm.invalid"
+          [disabled]="nameForm.pristine"
           (click)="chengeUserName()"
           class="button"
         >

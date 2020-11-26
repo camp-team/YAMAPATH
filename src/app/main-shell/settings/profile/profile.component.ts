@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   $user: Observable<UserData> = this.authService.user$;
   imageFile: string;
   nameForm = new FormControl('', [
-    Validators.required,
     Validators.maxLength(30),
   ]);
 
