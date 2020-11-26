@@ -27,7 +27,6 @@ export class GuestGuard implements CanActivate, CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('guestGuard');
     return this.authService.user$.pipe(
       map((user) => !user),
       tap((isGuest) => {
@@ -45,7 +44,6 @@ export class GuestGuard implements CanActivate, CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log('guestGuard2');
     return this.authService.user$.pipe(
       map((user) => !user),
       take(1),
