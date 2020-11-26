@@ -1,7 +1,6 @@
 @import 'variables';
 
 * {
-  color: $color-font;
 }
 button {
   display: block;
@@ -10,6 +9,11 @@ button {
 
 .avatar-section {
   margin-bottom: 40px;
+  color: $color-font;
+}
+
+.name-section {
+  color: $color-font;
 }
 
 .profile {

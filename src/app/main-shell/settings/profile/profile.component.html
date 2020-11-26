@@ -3,23 +3,21 @@
     <ng-container *ngIf="$user | async as user">
       <section class="avatar-section">
         <h3>アバターの変更</h3>
-        <label class="avatar">
-          <img
-            class="avatar"
-            [src]="imageFile ? imageFile : user.avatarURL"
-            alt=""
-            (click)="(crop.input)"
-          />
-          <deer-crop-trigger
-            class="crop"
-            #crop
-            [options]="{
-              aspectRatio: 1 / 1,
-              oldImageUrl: imageFile ? imageFile : user.avatarURL
-            }"
-            (image)="onCroppedImage($event)"
-          ></deer-crop-trigger>
-        </label>
+        <img
+          class="avatar"
+          [src]="imageFile ? imageFile : user.avatarURL"
+          alt=""
+          (click)="(crop.input)"
+        />
+        <deer-crop-trigger
+          class="crop"
+          #crop
+          [options]="{
+            aspectRatio: 1 / 1,
+            oldImageUrl: imageFile ? imageFile : user.avatarURL
+          }"
+          (image)="onCroppedImage($event)"
+        ></deer-crop-trigger>
         <button
           mat-raised-button
           color="primary"
@@ -41,9 +39,6 @@
             [formControl]="nameForm"
             required
           />
-          <mat-error *ngIf="nameForm.hasError('required')"
-            >必須入力です</mat-error
-          >
           <mat-error *ngIf="nameForm.hasError('maxlength')"
             >最大文字数を超えてます</mat-error
           >
