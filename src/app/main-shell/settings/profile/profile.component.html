@@ -8,15 +8,14 @@
             class="avatar"
             [src]="imageFile ? imageFile : user.avatarURL"
             alt=""
-            (click)="(crop.input)"
+            (click)="crop.input.nativeElement.click()"
           />
         </label>
         <deer-crop-trigger
           class="crop"
           #crop
           [options]="{
-            aspectRatio: 1 / 1,
-            oldImageUrl: imageFile ? imageFile : user.avatarURL
+            aspectRatio: 1 / 1
           }"
           (image)="onCroppedImage($event)"
         ></deer-crop-trigger>
