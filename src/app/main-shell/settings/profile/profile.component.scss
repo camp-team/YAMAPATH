@@ -17,12 +17,12 @@ button {
 .profile {
   text-align: center;
 }
-.avatar {
+
+.avatar-wrapper {
   width: 160px;
   display: block;
   position: relative;
   margin: 0 auto 16px;
-  border-radius: 50%;
   &::before {
     font-family: 'Material Icons';
     content: '\e439';
@@ -40,6 +40,15 @@ button {
     z-index: 1;
   }
 }
+
+.avatar {
+  width: 160px;
+  display: block;
+  position: relative;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+}
+
 .crop {
   display: none;
 }

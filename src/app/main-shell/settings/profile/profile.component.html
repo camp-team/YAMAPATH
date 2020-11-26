@@ -3,12 +3,14 @@
     <ng-container *ngIf="$user | async as user">
       <section class="avatar-section">
         <h3>アバターの変更</h3>
-        <img
-          class="avatar"
-          [src]="imageFile ? imageFile : user.avatarURL"
-          alt=""
-          (click)="(crop.input)"
-        />
+        <label class="avatar-wrapper">
+          <img
+            class="avatar"
+            [src]="imageFile ? imageFile : user.avatarURL"
+            alt=""
+            (click)="(crop.input)"
+          />
+        </label>
         <deer-crop-trigger
           class="crop"
           #crop
