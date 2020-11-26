@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   imageFile: string;
   nameForm = new FormControl('', [
     Validators.required,
-    Validators.maxLength(25),
+    Validators.maxLength(30),
   ]);
 
   constructor(
