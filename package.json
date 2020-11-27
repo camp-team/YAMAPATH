@@ -29,6 +29,7 @@
     "@angular/platform-browser-dynamic": "~11.0.0",
     "@angular/router": "~11.0.0",
     "@deer-inc/ngx-croppie": "0.0.16",
+    "algoliasearch": "^4.8.2",
     "croppie": "^2.6.5",
     "firebase": "^7.0.0 || ^8.0.0",
     "rxjs": "~6.6.0",
