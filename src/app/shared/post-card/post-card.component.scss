@@ -1,0 +1,44 @@
+.avatar {
+  background: #fff center/cover;
+  margin-right: 10px;
+}
+
+.card {
+  &__header {
+    justify-content: space-between;
+  }
+
+  &__title {
+    flex: 1;
+    margin: 5px 0 0 -6px;
+    text-align: left;
+  }
+
+  &__text {
+    padding: 0 10px;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  &__link {
+    display: block;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 16px;
+    text-align: left;
+    word-break: break-all;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 0 10px;
+    margin-top: 30px;
+  }
+
+  &__like {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+}

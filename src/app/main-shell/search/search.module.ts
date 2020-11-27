@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchComponent } from './search/search.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [SearchComponent],
-  imports: [CommonModule, SearchRoutingModule],
+  imports: [CommonModule, SearchRoutingModule, SharedModule],
 })
 export class SearchModule {}
