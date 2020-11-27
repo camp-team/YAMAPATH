@@ -4,3 +4,4 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
 export * from './user.function';
+export * from './post.function';

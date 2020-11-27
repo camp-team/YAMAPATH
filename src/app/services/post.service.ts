@@ -18,10 +18,10 @@ export class PostService {
   async createPost(
     post: Omit<Post, 'postId' | 'createdAt' | 'authorUid'>,
     position: google.maps.LatLngLiteral,
-    file: string
+    file?: string
   ): Promise<Post> {
     const postId = this.db.createId();
-    let imageUrl: string;
+    let imageUrl = '';
     if (file !== undefined) {
       imageUrl = await this.setImageToStorage(postId, file);
     }
