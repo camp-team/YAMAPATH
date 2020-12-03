@@ -8,8 +8,6 @@ export const createPost = functions
   .firestore.document('posts/{id}')
   .onCreate(async (snap, context) => {
     const data = snap.data();
-    functions.logger.log('snap', snap);
-    functions.logger.log('context', context);
     return algolia.saveRecord({
       indexName: 'posts',
       largeConcentKey: 'body',
@@ -24,7 +22,7 @@ export const deletePost = functions
     const data = snap.data();
 
     if (data) {
-      return algolia.removeRecord('posts', data.id);
+      return algolia.removeRecord('posts', data.postId);
     } else {
       return;
     }
