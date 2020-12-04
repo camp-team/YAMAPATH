@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Post } from 'src/app/interfaces/post';
+import { Post, PostWithUser } from 'src/app/interfaces/post';
 
 @Component({
   selector: 'app-post-card',
@@ -7,7 +7,7 @@ import { Post } from 'src/app/interfaces/post';
   styleUrls: ['./post-card.component.scss'],
 })
 export class PostCardComponent implements OnInit {
-  @Input() post: Post;
+  @Input() post: PostWithUser;
 
   constructor() {}
 

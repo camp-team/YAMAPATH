@@ -1,20 +1,24 @@
 <mat-card class="card">
-  <mat-card-header>
-    <div
-      mat-card-avatar
-      style.background-image="'url(http://placehold.jp/200x200.png)'"
-      class="card__avatar"
-    ></div>
-    <mat-card-title>やまたろう</mat-card-title>
-    <mat-card-subtitle>絶景ポイント</mat-card-subtitle>
-  </mat-card-header>
+  <p>{{ post.category }}</p>
+
+  <mat-card-content class="card__body">
+    <p class="card__content">{{ post.text }}</p>
+  </mat-card-content>
   <div
-    style.background-image="'url(http://placehold.jp/200x200.png)'"
+    *ngIf="post.imageUrl"
+    [style.background-image]="'url(' + post.imageUrl + ')'"
     class="card__image"
     alt="image"
   ></div>
-  <mat-card-content class="card__body">
-    <p class="card__content">テストテスト</p>
-    <p class="card__date">2020/11/27</p>
-  </mat-card-content>
+  <div class="card__bottom">
+    <div
+      mat-card-avatar
+      [style.background-image]="'url(' + post.user.avatarURL + ')'"
+      class="card__avatar"
+    ></div>
+    <mat-card-title>{{ post.user.name }}</mat-card-title>
+    <mat-card-subtitle>{{
+      post.createdAt | date: 'yyyy/MM/dd HH:mm'
+    }}</mat-card-subtitle>
+  </div>
 </mat-card>
