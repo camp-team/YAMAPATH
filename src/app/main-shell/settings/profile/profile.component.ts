@@ -9,23 +9,20 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
   $user: Observable<UserData> = this.authService.user$;
   imageFile: string;
-  nameForm = new FormControl('', [
-    Validators.maxLength(30),
-  ]);
+  nameForm = new FormControl('', [Validators.maxLength(30)]);
 
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private snackBar: MatSnackBar
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onCroppedImage(image: string) {
     this.imageFile = image;
@@ -33,7 +30,7 @@ export class ProfileComponent implements OnInit {
 
   chengeUserAvatar() {
     return this.userService
-      .changeUserAvater(this.authService.uid, this.imageFile)
+      .changeUserAvatar(this.authService.uid, this.imageFile)
       .then(() => {
         this.snackBar.open('変更されました', null);
         this.imageFile = null;
@@ -55,5 +52,4 @@ export class ProfileComponent implements OnInit {
         this.snackBar.open('変更に失敗しました', null);
       });
   }
-
 }
