@@ -84,7 +84,10 @@ p {
   padding: 0 16px;
 }
 
-.mat-button-wrapper {
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
   color: #efefef;
 }
 

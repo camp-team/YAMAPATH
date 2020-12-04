@@ -1,0 +1,57 @@
+<div class="inner-container">
+  <form class="search" (ngSubmit)="routeSearch(searchControl.value)">
+    <input
+      class="search__input"
+      type="text"
+      placeholder="投稿内容を検索"
+      [formControl]="searchControl"
+    />
+    <button class="search__button">
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+  <mat-form-field>
+    <mat-label>カテゴリ</mat-label>
+    <mat-select
+      (selectionChange)="buildQueryParameterByCategories($event)"
+      [(ngModel)]="category"
+    >
+      <mat-option
+        *ngFor="let categoryOption of categoryOptions"
+        [value]="categoryOption.value"
+        >{{ categoryOption.label }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>ソート</mat-label>
+    <mat-select
+      (selectionChange)="buildQueryParameterBySort($event)"
+      [(ngModel)]="sort"
+    >
+      <mat-option
+        *ngFor="let sortOption of sortOptions"
+        [value]="sortOption.value"
+        >{{ sortOption.label }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-stroked-button
+    color="primary"
+    [disabled]="!(searchQuery || category)"
+    (click)="searchReset()"
+  >
+    検索条件をリセット
+  </button>
+
+  <ng-container *ngIf="searchQuery">
+    <p>「{{ posts.length }}」件ヒットしました</p>
+  </ng-container>
+  <div class="grid">
+    <ng-container *ngFor="let post of posts">
+      <app-post-card [post]="post"></app-post-card>
+    </ng-container>
+  </div>
+</div>
