@@ -101,14 +101,15 @@ export class SearchComponent implements OnInit {
         hitsPerPage: this.requestOptions.hitsPerPage,
         facetFilters: [`category:${this.category}`],
       };
-
-      this.searchService
-        .getPostWithUser(this.searchQuery, searchOptions, this.sort)
-        .then(async (result) => {
-          const items = await result.pipe(take(1)).toPromise();
-          this.posts.push(...items);
-        })
-        .finally(() => (this.isLoading = false));
+      setTimeout(() => {
+        this.searchService
+          .getPostWithUser(this.searchQuery, searchOptions, this.sort)
+          .then(async (result) => {
+            const items = await result.pipe(take(1)).toPromise();
+            this.posts.push(...items);
+          })
+          .finally(() => (this.isLoading = false));
+      }, 800);
     }
   }
 
