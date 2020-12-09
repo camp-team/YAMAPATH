@@ -1,5 +1,8 @@
 <div class="inner-container">
-  <form class="search" (ngSubmit)="routeSearch(searchControl.value)">
+  <form
+    class="search"
+    (ngSubmit)="buildQueryParameterBySentence(searchControl.value)"
+  >
     <input
       class="search__input"
       type="text"
@@ -53,5 +56,19 @@
     <ng-container *ngFor="let post of posts">
       <app-post-card [post]="post"></app-post-card>
     </ng-container>
+    <div
+      infiniteScroll
+      [infiniteScrollDistance]="0.1"
+      [infiniteScrollThrottle]="20"
+      (scrolled)="addSearch()"
+    ></div>
+    <mat-progress-spinner
+      class="loading"
+      *ngIf="isLoading"
+      mode="indeterminate"
+      color="primary"
+      [diameter]="40"
+    ></mat-progress-spinner>
+    <div style="height: 24px; background-color: red"></div>
   </div>
 </div>

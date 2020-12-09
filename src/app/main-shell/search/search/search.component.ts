@@ -18,13 +18,11 @@ export class SearchComponent implements OnInit {
   searchQuery: string;
   category: string;
   sort: string;
+  isLoading: boolean;
 
   private requestOptions: {
     page: number;
     hitsPerPage: number;
-  } = {
-    page: 0,
-    hitsPerPage: 6,
   };
 
   readonly categoryOptions: {
@@ -83,6 +81,11 @@ export class SearchComponent implements OnInit {
 
   init(): void {
     this.route.queryParamMap.subscribe((param) => {
+      this.posts = [];
+      this.requestOptions = {
+        page: 0,
+        hitsPerPage: 6,
+      };
       this.searchQuery = param.get('searchQuery') || '';
       this.category = param.get('category') || '';
       this.sort = param.get('sort') || 'posts';
@@ -91,21 +94,25 @@ export class SearchComponent implements OnInit {
   }
 
   search(): void {
-    this.posts = [];
-    const searchOptions = {
-      ...this.requestOptions,
-      facetFilters: [`category:${this.category}`],
-    };
+    if (!this.isLoading) {
+      this.isLoading = true;
+      const searchOptions = {
+        page: this.requestOptions.page,
+        hitsPerPage: this.requestOptions.hitsPerPage,
+        facetFilters: [`category:${this.category}`],
+      };
 
-    this.searchService
-      .getPostWithUser(this.searchQuery, searchOptions, this.sort)
-      .then(async (result) => {
-        const items = await result.pipe(take(1)).toPromise();
-        this.posts.push(...items);
-      });
+      this.searchService
+        .getPostWithUser(this.searchQuery, searchOptions, this.sort)
+        .then(async (result) => {
+          const items = await result.pipe(take(1)).toPromise();
+          this.posts.push(...items);
+        })
+        .finally(() => (this.isLoading = false));
+    }
   }
 
-  routeSearch(searchQuery: string): void {
+  buildQueryParameterBySentence(searchQuery: string): void {
     this.router.navigate([], {
       queryParamsHandling: 'merge',
       queryParams: {
@@ -137,7 +144,18 @@ export class SearchComponent implements OnInit {
   searchReset(): void {
     this.router.navigateByUrl('/search').then(() => {
       this.searchControl.patchValue('');
-      this.category = null;
+      this.category = '';
+      this.requestOptions.page = 0;
     });
+  }
+
+  addSearch(): void {
+    console.log('run');
+    if (!this.isLoading) {
+      console.log('run2');
+      this.requestOptions.page++;
+      this.search();
+      console.log(this.requestOptions.page);
+    }
   }
 }
