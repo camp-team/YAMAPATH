@@ -150,12 +150,9 @@ export class SearchComponent implements OnInit {
   }
 
   addSearch(): void {
-    console.log('run');
     if (!this.isLoading) {
-      console.log('run2');
       this.requestOptions.page++;
       this.search();
-      console.log(this.requestOptions.page);
     }
   }
 }
