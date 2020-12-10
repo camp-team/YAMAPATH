@@ -34,7 +34,7 @@ export class SearchService {
     sortKey: string
   ): Promise<Observable<PostWithUser[]>> {
     const result = await this.index[sortKey].search(searchQuery, searchoptions);
-    const posts = result.hits as any[];
+    const posts = result.hits as Post[];
     if (posts.length) {
       const uids: string[] = posts.map((item: Post) => item.authorUid);
       const uniquedUserIds: string[] = Array.from(new Set(uids));
@@ -51,7 +51,7 @@ export class SearchService {
           return items.map((item) => {
             return {
               ...item,
-              user: users.find((user) => item.userId === user.uid),
+              user: users.find((user) => item.authorUid === user.uid),
             };
           });
         })

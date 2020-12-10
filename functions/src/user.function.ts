@@ -8,6 +8,7 @@ export const createUser = functions
   .auth.user()
   .onCreate((user) => {
     return db.doc(`users/${user.uid}`).set({
+      uid: user.uid,
       name: user.displayName,
       avatarURL: user.photoURL,
       email: user.email,
