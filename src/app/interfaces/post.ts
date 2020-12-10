@@ -6,6 +6,7 @@ export interface Post {
   text: string;
   authorUid: string;
   likedCount: number;
+  likedUserIds: string[];
   position: google.maps.LatLngLiteral;
   createdAt: number;
   isPublic: boolean;

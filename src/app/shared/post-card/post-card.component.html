@@ -17,6 +17,14 @@
       class="card__avatar"
     ></div>
     <mat-card-title>{{ post.user.name }}</mat-card-title>
+    <div>{{ likedCount }}</div>
+    <button *ngIf="isLiked; else yetLike" mat-button (click)="unLikePost()">
+      unLike
+    </button>
+    <ng-template #yetLike>
+      <button mat-button (click)="likePost()">like</button>
+    </ng-template>
+
     <mat-card-subtitle>{{
       post.createdAt | date: 'yyyy/MM/dd HH:mm'
     }}</mat-card-subtitle>
