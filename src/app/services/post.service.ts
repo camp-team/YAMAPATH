@@ -17,13 +17,16 @@ export class PostService {
 
   async createPost(
     post: Omit<Post, 'postId' | 'createdAt' | 'authorUid'>,
-    position: google.maps.LatLngLiteral,
+    position?: google.maps.LatLngLiteral,
     file?: string
   ): Promise<Post> {
     const postId = this.db.createId();
     let imageUrl = '';
     if (file !== undefined) {
       imageUrl = await this.setImageToStorage(postId, file);
+    }
+    if (!position) {
+      const position = null;
     }
     const newValue: Post = {
       postId,
@@ -39,15 +42,41 @@ export class PostService {
   }
 
   async setImageToStorage(postId: string, file: string): Promise<string> {
-    const resule = await this.storage
+    const result = await this.storage
       .ref(`posts/${postId}`)
       .putString(file, 'data_url');
-    return resule.ref.getDownloadURL();
+    return result.ref.getDownloadURL();
   }
 
   getPosts(): Observable<Post[]> {
     return this.db
       .collection<Post>('posts', (ref) => ref.where('public', '==', true))
       .valueChanges();
+  }
+
+  getPostById(postId: string): Observable<Post> {
+    console.log(postId);
+    return this.db.doc<Post>(`posts/${postId}`).valueChanges();
+  }
+
+  deletePost(id: string): Promise<void> {
+    return this.db.doc<Post>(`posts/${id}`).delete();
+  }
+
+  async updatePost(
+    post: Omit<Post, 'postId' | 'createdAt' | 'authorUid'>,
+    file: string,
+    postId: string
+  ) {
+    let imageUrl = '';
+    if (file !== undefined) {
+      imageUrl = await this.setImageToStorage(postId, file);
+    }
+    const newValue: Omit<Post, 'postId' | 'createdAt' | 'authorUid'> = {
+      imageUrl,
+      updateAt: Date.now(),
+      ...post,
+    };
+    return this.db.doc<Post>(`posts/${postId}`).update(newValue);
   }
 }
