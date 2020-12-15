@@ -97,7 +97,6 @@ export class CreateComponent implements OnInit {
             .getPostById(id)
             .pipe(take(1))
             .subscribe((post) => {
-              console.log(post);
               this.form.setValue({
                 category: post.category,
                 text: post.text,

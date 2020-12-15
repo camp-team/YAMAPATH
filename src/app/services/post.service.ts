@@ -55,7 +55,6 @@ export class PostService {
   }
 
   getPostById(postId: string): Observable<Post> {
-    console.log(postId);
     return this.db.doc<Post>(`posts/${postId}`).valueChanges();
   }
 
