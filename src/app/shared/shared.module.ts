@@ -9,9 +9,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { PostCardComponent } from './post-card/post-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { CategoryToJapanesePipe } from '../pipes/category-to-japanese.pipe';
+import { CategoryToIconCodePipe } from '../pipes/category-to-icon-code.pipe';
 
 @NgModule({
-  declarations: [GoogleMapComponent, PostCardComponent],
+  declarations: [
+    GoogleMapComponent,
+    PostCardComponent,
+    CategoryToJapanesePipe,
+    CategoryToIconCodePipe,
+  ],
   imports: [
     CommonModule,
     SharedRoutingModule,
