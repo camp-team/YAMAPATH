@@ -6,6 +6,12 @@ const routes: Routes = [
   {
     path: '',
     component: CreateComponent,
+    children: [
+      {
+        path: ':id',
+        component: CreateComponent,
+      },
+    ],
   },
 ];
 

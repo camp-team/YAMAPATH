@@ -5,9 +5,34 @@
 }
 
 .card {
-  &__avatar {
-    background: #fff center/cover;
-    margin-right: 10px;
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__created-at {
+    margin-left: 16px;
+    color: grey;
+  }
+
+  &__edit {
+    position: absolute;
+    top: 8px;
+    right: 0px;
+  }
+
+  &__text {
+    margin: 8px;
+    font-size: 16px;
+    text-align: left;
   }
 
   &__image {
@@ -20,16 +45,51 @@
     text-align: center;
   }
 
-  &__text {
-    padding: 0 10px;
-    font-size: 16px;
-    text-align: left;
-  }
-
   &__bottom {
     display: flex;
     justify-content: space-between;
-    padding: 0 0 0 10px;
+    align-items: center;
     margin-top: 30px;
   }
+
+  &__profile {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__avatar {
+    background: #fff center/cover;
+  }
+}
+
+.category-icon {
+  &--danger {
+    color: red;
+  }
+  &--view {
+    color: #00838e;
+  }
+  &--toilet {
+    color: #80b1fc;
+  }
+  &--water {
+    color: #0a74cf;
+  }
+  &--rest {
+    color: #3ca14e;
+  }
+  &--other {
+    color: #5f7c8a;
+  }
+}
+
+.like-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.like-btn {
+  transition: color 3s;
 }

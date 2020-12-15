@@ -39,18 +39,29 @@
       <div class="form__image">
         <div class="form__image--label">画像を投稿</div>
         <div class="form__cropper">
-          <deer-crop-trigger
-            [options]="{
-              aspectRatio: 1 / 1
-            }"
-            (image)="onCroppedImage($event)"
-          ></deer-crop-trigger>
+          <ng-container *ngIf="oldImage; else notOldImage">
+            <deer-crop-trigger
+              [options]="{
+                aspectRatio: 1 / 1,
+                oldImageUrl: oldImage
+              }"
+              (image)="onCroppedImage($event)"
+            ></deer-crop-trigger>
+          </ng-container>
+          <ng-template #notOldImage>
+            <deer-crop-trigger
+              [options]="{
+                aspectRatio: 1 / 1
+              }"
+              (image)="onCroppedImage($event)"
+            ></deer-crop-trigger>
+          </ng-template>
         </div>
       </div>
 
       <div class="button-wrapper">
         <mat-slide-toggle
-          formControlName="public"
+          formControlName="isPublic"
           [(ngModel)]="isChecked"
           color="primary"
           class="form__public"
@@ -69,14 +80,26 @@
             >位置情報を含めない</ng-template
           ></mat-slide-toggle
         >
-        <button
-          mat-raised-button
-          color="primary"
-          [disabled]="form.invalid"
-          class="form__submit"
-        >
-          投稿
-        </button>
+        <ng-container *ngIf="!isEdit; else create">
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="form.invalid"
+            class="form__submit"
+          >
+            投稿
+          </button>
+        </ng-container>
+        <ng-template #create>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="form.invalid"
+            class="form__submit"
+          >
+            更新
+          </button>
+        </ng-template>
       </div>
     </form>
   </div>

@@ -1,32 +1,77 @@
 <mat-card class="card">
-  <p>{{ post.category }}</p>
+  <div class="card__header">
+    <div class="card__title-wrapper">
+      <mat-icon class="category-icon--{{ post.category }}">{{
+        post.category | categoryToIconCode
+      }}</mat-icon>
+      <p>{{ post.category | categoryToJapanese }}</p>
+      <p class="card__created-at">
+        {{ post.createdAt | date: 'yyyy/MM/dd' }}
+      </p>
+    </div>
 
-  <mat-card-content class="card__body">
-    <p class="card__content">{{ post.text }}</p>
-  </mat-card-content>
-  <div
-    *ngIf="post.imageUrl"
-    [style.background-image]="'url(' + post.imageUrl + ')'"
-    class="card__image"
-    alt="image"
-  ></div>
-  <div class="card__bottom">
+    <ng-container *ngIf="user$ | async as user">
+      <button
+        *ngIf="user.uid === post.user.uid"
+        mat-icon-button
+        [matMenuTriggerFor]="menuRef"
+        class="card__edit"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menuRef="matMenu">
+        <button mat-menu-item (click)="editPost(post.postId)">
+          <mat-icon>edit</mat-icon>
+          <span>編集する</span>
+        </button>
+        <button mat-menu-item (click)="deletePost(post.postId)">
+          <mat-icon>delete</mat-icon>
+          <span>削除</span>
+        </button>
+      </mat-menu>
+    </ng-container>
+  </div>
+
+  <div class="card__body">
+    <p class="card__text">{{ post.text }}</p>
     <div
-      mat-card-avatar
-      [style.background-image]="'url(' + post.user.avatarURL + ')'"
-      class="card__avatar"
+      *ngIf="post.imageUrl"
+      [style.background-image]="'url(' + post.imageUrl + ')'"
+      class="card__image"
+      alt="image"
     ></div>
-    <mat-card-title>{{ post.user.name }}</mat-card-title>
-    <div>{{ likedCount }}</div>
-    <button *ngIf="isLiked; else yetLike" mat-button (click)="unLikePost()">
-      unLike
-    </button>
-    <ng-template #yetLike>
-      <button mat-button (click)="likePost()">like</button>
-    </ng-template>
+  </div>
 
-    <mat-card-subtitle>{{
-      post.createdAt | date: 'yyyy/MM/dd HH:mm'
-    }}</mat-card-subtitle>
+  <div class="card__bottom">
+    <div class="card__profile">
+      <div
+        mat-card-avatar
+        [style.background-image]="'url(' + post.user.avatarURL + ')'"
+        class="card__avatar"
+      ></div>
+      <p>{{ post.user.name }}</p>
+    </div>
+    <div class="like-wrapper">
+      <button
+        *ngIf="isLiked; else unLiked"
+        (click)="unLikePost()"
+        class="like-btn"
+        mat-icon-button
+        color="warn"
+      >
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <ng-template #unLiked>
+        <button
+          [disabled]="isProcessing"
+          (click)="likePost()"
+          class="like-btn"
+          mat-icon-button
+        >
+          <mat-icon>favorite_border</mat-icon>
+        </button>
+      </ng-template>
+      <div>{{ likedCount }}</div>
+    </div>
   </div>
 </mat-card>
