@@ -28,7 +28,7 @@ export class DeleteComponent implements OnInit {
       .afterClosed()
       .subscribe((status) => {
         if (status) {
-          this.deleteUser(this.authService.uid).then(() => {
+          this.deleteUser(this.authService.uid).finally(() => {
             this.snackBar.open('アカウントを削除しました');
             this.router.navigateByUrl('/welcome');
           });
