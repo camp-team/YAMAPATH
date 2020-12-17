@@ -38,7 +38,7 @@ export const deleteUserAccount = functions
   .auth.user()
   .onDelete(async (user, _) => {
     const uid = user.uid;
-    const posts = db.collection(`posts`).where('userId', '==', uid);
+    const posts = db.collection(`posts`).where('authorUid', '==', uid);
     const deleteUserData = db.doc(`users/${uid}`).delete();
     const deleteAllPosts = deleteCollectionByReference(posts);
     const deleteAllLikedPosts = deleteCollectionByPath(
