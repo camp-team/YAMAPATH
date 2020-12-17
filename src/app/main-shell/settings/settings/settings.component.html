@@ -5,13 +5,13 @@
       routerLink="/settings/profile"
       routerLinkActive
       #rla="routerLinkActive"
-      [active]="rla.isActive || !(rla2.isActive && rla3.isActive)"
+      [active]="rla.isActive"
     >
       アカウント
     </a>
     <a
       mat-tab-link
-      routerLink="/setting/billing"
+      routerLink="/settings/billing"
       routerLinkActive
       #rla2="routerLinkActive"
       [active]="rla2.isActive"
@@ -20,7 +20,7 @@
     </a>
     <a
       mat-tab-link
-      routerLink="/setting/delete"
+      routerLink="/settings/delete"
       routerLinkActive
       #rla3="routerLinkActive"
       [active]="rla3.isActive"

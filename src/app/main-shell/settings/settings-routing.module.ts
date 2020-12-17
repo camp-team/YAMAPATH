@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DeleteComponent } from './delete/delete.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 
@@ -10,9 +11,13 @@ const routes: Routes = [
     children: [
       {
         path: 'profile',
-        component: ProfileComponent
-      }
-    ]
+        component: ProfileComponent,
+      },
+      {
+        path: 'delete',
+        component: DeleteComponent,
+      },
+    ],
   },
 ];
 
@@ -20,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SettingsRoutingModule { }
+export class SettingsRoutingModule {}
