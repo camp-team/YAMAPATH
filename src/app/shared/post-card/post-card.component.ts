@@ -1,10 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { PostWithUser } from 'src/app/interfaces/post';
 import { UserData } from 'src/app/interfaces/user-data';
 import { AuthService } from 'src/app/services/auth.service';
 import { LikeService } from 'src/app/services/like.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post-card',
@@ -14,12 +17,16 @@ import { LikeService } from 'src/app/services/like.service';
 export class PostCardComponent implements OnInit {
   @Input() post: PostWithUser;
   isLiked: boolean;
+  isProcessing: boolean;
   likedCount: number;
   user$: Observable<UserData> = this.authService.user$;
 
   constructor(
     private authService: AuthService,
-    private likeService: LikeService
+    private likeService: LikeService,
+    private router: Router,
+    private postService: PostService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -37,15 +44,35 @@ export class PostCardComponent implements OnInit {
     this.likedCount = this.post.likedCount;
   }
 
+  editPost(postId: string) {
+    this.router.navigate(['/create'], {
+      queryParams: {
+        id: postId,
+      },
+    });
+  }
+
+  deletePost(postId: string) {
+    this.postService.deletePost(postId).then(() => {
+      this.snackBar.open('削除しました、反映にはリロードが必要です');
+    });
+  }
+
   likePost(): void {
+    this.isProcessing = true;
     this.isLiked = true;
     this.likedCount++;
-    this.likeService.likePost(this.post.postId, this.post.user.uid);
+    this.likeService
+      .likePost(this.post.postId, this.post.user.uid)
+      .finally(() => (this.isProcessing = false));
   }
 
   unLikePost(): void {
+    this.isProcessing = true;
     this.isLiked = false;
     this.likedCount--;
-    this.likeService.unLikePost(this.post.postId, this.post.user.uid);
+    this.likeService
+      .unLikePost(this.post.postId, this.post.user.uid)
+      .finally(() => (this.isProcessing = false));
   }
 }

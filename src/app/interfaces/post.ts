@@ -7,9 +7,11 @@ export interface Post {
   authorUid: string;
   likedCount: number;
   likedUserIds: string[];
-  position: google.maps.LatLngLiteral;
+  position?: google.maps.LatLngLiteral | null;
   createdAt: number;
+  updateAt?: number;
   isPublic: boolean;
+  isPosition: boolean;
   imageUrl?: string;
 }
 
