@@ -10,10 +10,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CropperModule } from '@deer-inc/ngx-croppie';
-
+import { DeleteComponent } from './delete/delete.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [SettingsComponent, ProfileComponent],
+  declarations: [
+    SettingsComponent,
+    ProfileComponent,
+    DeleteComponent,
+    DeleteDialogComponent,
+  ],
   imports: [
     CommonModule,
     SettingsRoutingModule,
@@ -23,7 +30,8 @@ import { CropperModule } from '@deer-inc/ngx-croppie';
     MatInputModule,
     CropperModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
   ],
 })
-export class SettingsModule { }
+export class SettingsModule {}
