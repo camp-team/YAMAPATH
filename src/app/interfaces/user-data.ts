@@ -3,5 +3,5 @@ export interface UserData {
   name: string;
   avatarURL: string;
   email: string;
-  likedPostIds: string[];
+  likePosts: string[];
 }
