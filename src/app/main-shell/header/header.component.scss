@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 :host {
   position: fixed;
@@ -13,8 +14,9 @@
   &__inner {
     min-height: 60px;
     display: flex;
+    gap: 24px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     position: relative;
   }
   &__settings {
@@ -35,6 +37,11 @@
     text-decoration: none;
     font-family: 'Baloo Da 2', cursive;
   }
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
   &__account {
     cursor: pointer;
     width: 42px;
@@ -46,5 +53,26 @@
   }
   &__button {
     color: #efefef;
+  }
+}
+
+.toolbar {
+  min-height: 60px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 24px;
+  &__items {
+    color: #efefef;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    &--active {
+      color: $color-font;
+    }
+  }
+  @include sp {
+    display: none;
   }
 }
