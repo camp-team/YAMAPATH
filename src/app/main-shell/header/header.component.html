@@ -1,39 +1,56 @@
 <div class="header">
   <div class="container">
     <div class="header__inner">
-      <div class="header__settings">
-        <a href="" routerLink="/settings/profile">
-          <mat-icon aria-hidden="false">settings</mat-icon>
-        </a>
-      </div>
       <h1 class="header__title">
         <a href="" class="header__logo-link"> YAMAPATH </a>
       </h1>
       <div class="header__actions">
-        <ng-container *ngIf="authService.user$ | async as user; else notLogin">
-          <img
-            [matMenuTriggerFor]="menuRef"
-            class="header__account"
-            [src]="user.avatarURL"
-            alt=""
-          />
-        </ng-container>
-        <mat-menu #menuRef="matMenu">
-          <button mat-menu-item (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-            <span>ログアウト</span>
-          </button>
-          <mat-divider></mat-divider>
-          <a mat-menu-item href="" routerLink="/terms">利用規約</a>
-          <a mat-menu-item href="" routerLink="/legal"
-            >特定商取引法に基づく表示</a
+        <div class="toolbar">
+          <a class="toolbar__items" routerLink="/">
+            <mat-icon>explore</mat-icon>
+          </a>
+          <a class="toolbar__items" routerLink="/"
+            ><mat-icon>list_alt</mat-icon></a
           >
-        </mat-menu>
-        <ng-template #notLogin>
-          <button class="header__button" mat-button routerLink="/login">
-            ログイン
-          </button>
-        </ng-template>
+          <a class="toolbar__items" routerLink="/search"
+            ><mat-icon>search</mat-icon></a
+          >
+          <a class="toolbar__items" routerLink="/create"
+            ><mat-icon>create</mat-icon></a
+          >
+        </div>
+        <div>
+          <ng-container
+            *ngIf="authService.user$ | async as user; else notLogin"
+          >
+            <img
+              [matMenuTriggerFor]="menuRef"
+              class="header__account"
+              [src]="user.avatarURL"
+              alt=""
+            />
+          </ng-container>
+          <mat-menu #menuRef="matMenu">
+            <button mat-menu-item routerLink="/settings/profile">
+              <mat-icon>account_box</mat-icon>
+              <span>アカウント設定</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>ログアウト</span>
+            </button>
+            <mat-divider></mat-divider>
+            <a mat-menu-item href="" routerLink="/terms">利用規約</a>
+            <a mat-menu-item href="" routerLink="/legal"
+              >特定商取引法に基づく表示</a
+            >
+          </mat-menu>
+          <ng-template #notLogin>
+            <button class="header__button" mat-button routerLink="/login">
+              ログイン
+            </button>
+          </ng-template>
+        </div>
       </div>
     </div>
   </div>
