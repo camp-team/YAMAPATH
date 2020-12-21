@@ -1,8 +1,25 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
+    match /posts/{postId} {
+      allow read: if resource.data.public == true || (request.auth != null && request.auth.uid == resource.data.authorUid);
+      allow create: if request.auth.uid != null;
+      allow update: if request.auth.uid == resource.data.authorUid;
+      allow delete: if request.auth.uid == resource.data.authorUid;
+    }
+    match /posts/{postId}/likedUserIds/{uid} {
+    	allow read: if true;
+      allow write: if request.auth.uid != null;
+    }
+    match /users/{uid} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if request.auth.uid == resource.data.uid;
+      allow delete: if request.auth.uid == resource.data.uid;
+    }
+    match /users/{uid}/likePosts/{postId} {
+      allow read: if true;
+      allow write: if request.auth.uid == uid;
     }
   }
 }

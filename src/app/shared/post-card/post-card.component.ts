@@ -63,7 +63,7 @@ export class PostCardComponent implements OnInit {
     this.isLiked = true;
     this.likedCount++;
     this.likeService
-      .likePost(this.post.postId, this.post.user.uid)
+      .likePost(this.post.postId, this.authService.uid)
       .finally(() => (this.isProcessing = false));
   }
 
@@ -72,7 +72,7 @@ export class PostCardComponent implements OnInit {
     this.isLiked = false;
     this.likedCount--;
     this.likeService
-      .unLikePost(this.post.postId, this.post.user.uid)
+      .unLikePost(this.post.postId, this.authService.uid)
       .finally(() => (this.isProcessing = false));
   }
 }
