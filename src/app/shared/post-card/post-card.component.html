@@ -51,6 +51,7 @@
       ></div>
       <p>{{ post.user.name }}</p>
     </div>
+    <a routerLink="/post-detail/{{ post.postId }}">詳細を見る</a>
     <div class="like-wrapper">
       <button
         *ngIf="isLiked; else unLiked"
