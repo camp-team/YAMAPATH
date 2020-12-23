@@ -17,6 +17,7 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class GoogleMapComponent implements OnInit, AfterViewInit {
   @Input() type: 'full' | 'small';
+  @Input() center?: google.maps.LatLng;
   @ViewChild(GoogleMap, { static: false }) map: google.maps.Map;
 
   posts$: Observable<Post[]> = this.postService.getPosts();
@@ -44,6 +45,17 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
+    this.getCurrentPosition();
+    if (this.center) {
+      this.setPostPositionToMapCenter();
+    }
+  }
+
+  setPostPositionToMapCenter() {
+    this.options.center = this.center;
+  }
+
+  getCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.currentPosition = {
@@ -55,8 +67,11 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.map.data.loadGeoJson('assets/amagiTrail.geojson');
+    this.loadGeoJson();
+  }
 
+  loadGeoJson() {
+    this.map.data.loadGeoJson('assets/amagiTrail.geojson');
     this.map.data.setStyle({
       strokeColor: '#4dc0b2',
       strokeWeight: 5,
