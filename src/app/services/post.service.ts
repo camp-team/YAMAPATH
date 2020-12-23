@@ -54,7 +54,7 @@ export class PostService {
 
   getPosts(): Observable<Post[]> {
     return this.db
-      .collection<Post>('posts', (ref) => ref.where('public', '==', true))
+      .collection<Post>('posts', (ref) => ref.where('isPublic', '==', true))
       .valueChanges();
   }
 
