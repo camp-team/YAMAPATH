@@ -11,7 +11,7 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./post-detail.component.scss'],
 })
 export class PostDetailComponent implements OnInit {
-  post: PostWithUser;
+  post$: Observable<PostWithUser>;
 
   constructor(
     private postService: PostService,
@@ -24,11 +24,7 @@ export class PostDetailComponent implements OnInit {
 
   getPost() {
     this.route.paramMap.subscribe((params) => {
-      this.postService
-        .getPostWithUserById(params.get('id'))
-        .then(async (result) => {
-          this.post = await result.pipe(take(1)).toPromise();
-        });
+      this.post$ = this.postService.getPostWithUserById(params.get('id'));
     });
   }
 }
