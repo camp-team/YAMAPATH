@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import { Post } from '../interfaces/post';
+import { combineLatest, Observable, of } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
+import { Post, PostWithUser } from '../interfaces/post';
+import { UserData } from '../interfaces/user-data';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +15,8 @@ export class PostService {
   constructor(
     private db: AngularFirestore,
     private authService: AuthService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private userService: UserService
   ) {}
 
   async createPost(
@@ -50,12 +54,30 @@ export class PostService {
 
   getPosts(): Observable<Post[]> {
     return this.db
-      .collection<Post>('posts', (ref) => ref.where('public', '==', true))
+      .collection<Post>('posts', (ref) => ref.where('isPublic', '==', true))
       .valueChanges();
   }
 
   getPostById(postId: string): Observable<Post> {
     return this.db.doc<Post>(`posts/${postId}`).valueChanges();
+  }
+
+  getPostWithUserById(id: string): Observable<PostWithUser> {
+    return this.db
+      .doc<Post>(`posts/${id}`)
+      .valueChanges()
+      .pipe(
+        switchMap((post: Post) => {
+          const user$ = this.userService.getUserByUid(post.authorUid);
+          return combineLatest([of(post), user$]);
+        }),
+        map(([post, user]) => {
+          return {
+            ...post,
+            user,
+          };
+        })
+      );
   }
 
   deletePost(id: string): Promise<void> {

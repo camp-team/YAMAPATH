@@ -16,6 +16,7 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostCardComponent implements OnInit {
   @Input() post: PostWithUser;
+  @Input() isDetail?: boolean;
   isLiked: boolean;
   isProcessing: boolean;
   likedCount: number;

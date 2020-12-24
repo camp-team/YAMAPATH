@@ -42,7 +42,7 @@ export const deleteUserAccount = functions
     const deleteUserData = db.doc(`users/${uid}`).delete();
     const deleteAllPosts = deleteCollectionByReference(posts);
     const deleteAllLikedPosts = deleteCollectionByPath(
-      `users/${uid}/likedPosts`
+      `users/${uid}/likePosts`
     );
     return Promise.all([deleteAllPosts, deleteAllLikedPosts, deleteUserData]);
   });
