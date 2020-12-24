@@ -10,20 +10,27 @@
       </map-marker>
       <map-marker
         #marker="mapMarker"
-        *ngFor="let posts of posts$ | async"
-        [position]="posts.position"
-        [options]="changeMarkerIcons(posts.category)"
+        *ngFor="let post of posts$ | async"
+        [position]="post.position"
+        [options]="changeMarkerIcons(post.category)"
         (mapClick)="markerClicked(marker, window)"
       >
         <map-info-window class="info__container" #window="mapInfoWindow">
-          <div class="info__text">{{ posts.text }}</div>
-          <ng-container *ngIf="posts.imageUrl">
+          <div class="info__text">{{ post.text }}</div>
+          <button
+            mat-icon-button
+            class="info__detail-link"
+            routerLink="/post-detail/{{ post.postId }}"
+          >
+            <mat-icon>info</mat-icon>
+          </button>
+          <ng-container *ngIf="post.imageUrl">
             <div
-              [style.background-image]="'url(' + posts.imageUrl + ')'"
+              [style.background-image]="'url(' + post.imageUrl + ')'"
               class="info__image"
               alt="image"
             ></div>
-            <p>{{ posts.imageUrl }}</p>
+            <p>{{ post.imageUrl }}</p>
           </ng-container>
         </map-info-window>
       </map-marker>
@@ -60,16 +67,23 @@
       </map-marker>
       <map-marker
         #marker="mapMarker"
-        *ngFor="let posts of posts$ | async"
-        [position]="posts.position"
-        [options]="changeMarkerIcons(posts.category)"
+        *ngFor="let post of posts$ | async"
+        [position]="post.position"
+        [options]="changeMarkerIcons(post.category)"
         (mapClick)="markerClicked(marker, window)"
       >
         <map-info-window class="info__container" #window="mapInfoWindow">
-          <div class="info__text">{{ posts.text }}</div>
-          <ng-container *ngIf="posts.imageUrl">
+          <div class="info__text">{{ post.text }}</div>
+          <button
+            mat-icon-button
+            class="info__detail-link"
+            routerLink="/post-detail/{{ post.postId }}"
+          >
+            <mat-icon>info</mat-icon>
+          </button>
+          <ng-container *ngIf="post.imageUrl">
             <div
-              [style.background-image]="'url(' + posts.imageUrl + ')'"
+              [style.background-image]="'url(' + post.imageUrl + ')'"
               class="info__image"
               alt="image"
             ></div>
