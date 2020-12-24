@@ -1,4 +1,9 @@
-<mat-card class="card">
+<mat-card class="card" [class.card--not-detail]="!isDetail">
+  <a
+    *ngIf="!isDetail"
+    routerLink="/post-detail/{{ post.postId }}"
+    class="card__detail-link"
+  ></a>
   <div class="card__header">
     <div class="card__title-wrapper">
       <mat-icon class="category-icon--{{ post.category }}">{{
@@ -51,7 +56,6 @@
       ></div>
       <p>{{ post.user.name }}</p>
     </div>
-    <a routerLink="/post-detail/{{ post.postId }}">詳細を見る</a>
     <div class="like-wrapper">
       <button
         *ngIf="isLiked; else unLiked"
