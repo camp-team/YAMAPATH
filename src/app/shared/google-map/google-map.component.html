@@ -17,13 +17,13 @@
       >
         <map-info-window class="info__container" #window="mapInfoWindow">
           <div class="info__text">{{ post.text }}</div>
-          <button
+          <a
             mat-icon-button
             class="info__detail-link"
             routerLink="/post-detail/{{ post.postId }}"
           >
             <mat-icon>info</mat-icon>
-          </button>
+          </a>
           <ng-container *ngIf="post.imageUrl">
             <div
               [style.background-image]="'url(' + post.imageUrl + ')'"
@@ -73,13 +73,13 @@
       >
         <map-info-window class="info__container" #window="mapInfoWindow">
           <div class="info__text">{{ post.text }}</div>
-          <button
+          <a
             mat-icon-button
             class="info__detail-link"
             routerLink="/post-detail/{{ post.postId }}"
           >
             <mat-icon>info</mat-icon>
-          </button>
+          </a>
           <ng-container *ngIf="post.imageUrl">
             <div
               [style.background-image]="'url(' + post.imageUrl + ')'"
