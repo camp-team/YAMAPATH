@@ -40,6 +40,15 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'users',
+        loadChildren: () =>
+          import('./users-page/users-page.module').then(
+            (m) => m.UsersPageModule
+          ),
+        canLoad: [AuthGuard],
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'terms',
         component: TermsComponent,
       },
