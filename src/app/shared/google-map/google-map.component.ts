@@ -47,12 +47,8 @@ export class GoogleMapComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getCurrentPosition();
     if (this.center) {
-      this.setPostPositionToMapCenter();
+      this.options.center = this.center;
     }
-  }
-
-  setPostPositionToMapCenter() {
-    this.options.center = this.center;
   }
 
   getCurrentPosition() {
