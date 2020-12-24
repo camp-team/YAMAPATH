@@ -40,6 +40,15 @@ const routes: Routes = [
         canActivate: [AuthGuard],
       },
       {
+        path: 'post-detail',
+        loadChildren: () =>
+          import('./post-detail/post-detail.module').then(
+            (m) => m.PostDetailModule
+          ),
+        canLoad: [AuthGuard],
+        canActivate: [AuthGuard],
+      },
+      {
         path: 'users',
         loadChildren: () =>
           import('./users-page/users-page.module').then(

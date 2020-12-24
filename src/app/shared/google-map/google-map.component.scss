@@ -11,8 +11,15 @@
     font-family: 'Arial', sans-serif;
     display: block;
     min-width: 200px;
+    padding: 24px;
     position: relative;
     background: white;
+  }
+  &__detail-link {
+    position: absolute;
+    top: -8px;
+    left: 17px;
+    color: #2196f3;
   }
   &__image {
     width: 100%;

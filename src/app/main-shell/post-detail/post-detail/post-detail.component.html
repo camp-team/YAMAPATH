@@ -1,0 +1,8 @@
+<div class="inner-container">
+  <ng-container *ngIf="post">
+    <app-google-map type="small" [center]="post.position"></app-google-map>
+    <div class="post">
+      <app-post-card [post]="post" [isDetail]="true"></app-post-card>
+    </div>
+  </ng-container>
+</div>
